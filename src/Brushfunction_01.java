@@ -22,18 +22,6 @@ import java.util.Scanner;
 public class Brushfunction_01 {
 	static Scanner in= new Scanner (System.in);
 	
-	/**
-	 * 
-	 * @param ForceMatrix
-	 * @param MB
-	 * @param ML
-	 * @return
-	 */
-	public static double[][] RadomForce(double[][] ForceMatrix, int MB, int ML){
-		
-		return ForceMatrix;
-	}
-	
 	
 	/** @brief Gm
 	 *  @brief Say Goodbye
@@ -197,11 +185,12 @@ public class Brushfunction_01 {
 				if(i>=0&&i<MB){
 					ForceMatrix[i][Pos[1]-1]=ForceMatrix[i][Pos[1]-1]+(Fo*damping);
 				}
-				if(Pos[0]-2>=0)
-					ForceMatrix[Pos[0]-2][Pos[1]-1]=ForceMatrix[Pos[0]-2][Pos[1]-1]+(Fo*damping1);
-				if(Pos[0]+2<MB)
-					ForceMatrix[Pos[0]+2][Pos[1]-1]=ForceMatrix[Pos[0]+2][Pos[1]-1]+(Fo*damping1);
 			}
+			if(Pos[0]-2>=0)
+					ForceMatrix[Pos[0]-2][Pos[1]-1]=ForceMatrix[Pos[0]-2][Pos[1]-1]+(Fo*damping1);
+			if(Pos[0]+2<MB)
+					ForceMatrix[Pos[0]+2][Pos[1]-1]=ForceMatrix[Pos[0]+2][Pos[1]-1]+(Fo*damping1);
+			
 		}
 		
 		if((Pos[0]-1>=0))
@@ -234,7 +223,7 @@ public class Brushfunction_01 {
 		return ForceMatrix;
 	}
 	
-	/** @brief BrushMedium
+	/** @brief BrushTall
 	 * @param ForceMatrix double[][], Cluster to print
 	 * @param MB int, Cluster Width
 	 * @param ML int, Cluster Length
@@ -386,7 +375,7 @@ public class Brushfunction_01 {
 		int [] ForcePosition= new int [2];
 		
 		while(Repeatnew==0){
-			BrushSize=0;
+			BrushSize=-1;
 			System.out.print("Enter Cluster Width: ");
 			MatrixWidth= in.nextInt();
 			System.out.println("Enter Cluster Length: ");
@@ -398,7 +387,7 @@ public class Brushfunction_01 {
 			ForceMatrix=FillMatrix(ForceMatrix,MatrixWidth,MatrixLength,MatrixZeroForce);
 			Repeatold=0;
 			while(Repeatold==0){
-				BrushSize=0;
+				BrushSize=-1;
 				System.out.println("The Cluster is: "+"\n");
 				PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
 				
@@ -453,9 +442,12 @@ public class Brushfunction_01 {
 				System.out.println("Enter 0 for Repeat, others for Exit:");
 				Repeatnew=in.nextInt();
 				if(Repeatnew==0){
-				System.out.println("Enter 0 for Simulation with the new Cluster, others to init new Cluster:");
-				Repeatold=in.nextInt();
-			}
+					System.out.println("Enter 0 for Simulation with the old Cluster, others to init new Cluster:");
+					Repeatold=in.nextInt();
+				}else{
+					Repeatold=5;
+					
+				}
 		}
 	}
 	Gm();
