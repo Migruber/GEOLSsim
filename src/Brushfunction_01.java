@@ -437,6 +437,7 @@ public class Brushfunction_01 {
 					PrintMatrix(ForceMatrix,MatrixBreite,MatrixLaenge);
 					break;*/
 				default:
+					break;
 				}
 				
 				System.out.println("Enter 0 for Repeat, others for Exit:");

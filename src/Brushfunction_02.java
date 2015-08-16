@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 /**
@@ -28,7 +29,7 @@ public class Brushfunction_02 {
 	 *  @brief Say Goodbye
 	 */
 	public static void Gm(){
-		System.out.println("Thank's for using the Cluster Brush Tools");
+		System.out.println("Thank's for using the Random Cluster Brush Tools");
 		System.out.println("copyright GM, GEOLSsim");
 	}
 	
@@ -340,92 +341,83 @@ public class Brushfunction_02 {
 	 */
 	public static void main(String[] args) {
 	
-		int Repeatnew=0; 
-		int Repeatold=0;
-		int MatrixWidth;
-		int MatrixLength;
-		double MatrixZeroForce;
-		int BrushSize=0;
-		double MatrixForce;
+		int ClusterWeidth;
+		int ClusterLength;
+		int Passages;
+		int BrushSize;
+		int ForceMax;
 		
-		int [] ForcePosition= new int [2];
+		System.out.println("Welcome, Cluster - Matrix Filler, Random Generator");
+		System.out.println("Please enter Cluster Width: ");
+		ClusterWeidth= in.nextInt();
+		System.out.println("Please enter Cluster Length: ");
+		ClusterLength= in.nextInt();
 		
-		while(Repeatnew==0){
-			BrushSize=0;
-			System.out.print("Enter Cluster Width: ");
-			MatrixWidth= in.nextInt();
-			System.out.println("Enter Cluster Length: ");
-			MatrixLength=in.nextInt();
-			System.out.println("Enter Cluster Zero Force (Cluster Element equal distribution): ");
-			MatrixZeroForce= in.nextInt();
+		double [][] Cluster= new double [ClusterWeidth][ClusterLength];
+		Cluster= FillMatrix(Cluster,ClusterWeidth,ClusterLength,0);
+		
+		System.out.println("How many passages (single force effects) you want to run?" );
+		Passages= in.nextInt();
+		System.out.println("Please enter the max. single Force: ");
+		ForceMax= in.nextInt();
+		
+		System.out.println("Your Parameters and the Zero Cluster: ");
+		PrintMatrix(Cluster, ClusterWeidth, ClusterLength);
+		System.out.println(" ");
+				
+		int Force;
+		int ForcePosition[]= new int[2];
+		
+		for(int i=0;i<Passages;i++){
+			BrushSize=RandomSolution.RandomSol(3);
+			Force=RandomSolution.RandomSol(ForceMax-1);
+			ForcePosition[0]=RandomSolution.RandomSol(ClusterWeidth-1);
+			ForcePosition[1]=RandomSolution.RandomSol(ClusterLength-1);
+			int ExitValue=0;
 			
-			double[][] ForceMatrix= new double [MatrixWidth][MatrixLength];
-			ForceMatrix=FillMatrix(ForceMatrix,MatrixWidth,MatrixLength,MatrixZeroForce);
-			Repeatold=0;
-			while(Repeatold==0){
-				BrushSize=-1;
-				System.out.println("The Cluster is: "+"\n");
-				PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
-				
-				while (BrushSize!=0&&BrushSize!=1&&BrushSize!=2&&BrushSize!=3&&BrushSize!=4){
-					System.out.println("Enter Brush Radius:");
-					System.out.println("0 = only point - force to position");
-					System.out.println("1 = force to position and  to first neighbor");
-					System.out.println("2 = force to position, first and second neighbor");
-					System.out.println("3 = force to position, first, second and third neighbor");
-					BrushSize=in.nextInt();
-				}
-				System.out.println("Enter applied force:");
-				MatrixForce=in.nextInt();
-				
-				
-				
-				switch(BrushSize){
-				case 0:
-					ForceMatrix=BrushPoint(ForceMatrix,MatrixWidth,MatrixLength,MatrixForce,ForcePosition);
-					System.out.println("The new Cluster is:");
-					PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
-					break;
-				case 1:
-					ForceMatrix=BrushSmall(ForceMatrix,MatrixWidth,MatrixLength,MatrixForce,ForcePosition);
-					System.out.println("The new Cluster is:");
-					PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
-					break;
-				case 2:
-					ForceMatrix=BrushMedium(ForceMatrix,MatrixWidth,MatrixLength,MatrixForce,ForcePosition);
-					System.out.println("The new Cluster is:");
-					PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
-					break;
-				case 3:
-					ForceMatrix=BrushTall(ForceMatrix,MatrixWidth,MatrixLength,MatrixForce,ForcePosition);
-					System.out.println("The new Cluster is:");
-					PrintMatrix(ForceMatrix,MatrixWidth,MatrixLength);
-					break;
-				/*case 4:
-					ForceMatrix=BrushSmall(ForceMatrix,MatrixBreite,MatrixLaenge,MatrixForce,ForcePosition);
-					System.out.println("Der fertige Force Cluster lautet, small Brush:");
-					PrintMatrix(ForceMatrix,MatrixBreite,MatrixLaenge);
-					ForceMatrix=BrushMedium(ForceMatrix,MatrixBreite,MatrixLaenge,MatrixForce,ForcePosition);
-					System.out.println("Der fertige Force Cluster lautet, medium Brush:");
-					PrintMatrix(ForceMatrix,MatrixBreite,MatrixLaenge);
-					ForceMatrix=BrushTall(ForceMatrix,MatrixBreite,MatrixLaenge,MatrixForce,ForcePosition);
-					System.out.println("Der fertige Force Cluster lautet, tall Bruch:");
-					PrintMatrix(ForceMatrix,MatrixBreite,MatrixLaenge);
-					break;*/
-				default:
-				}
-				
-				System.out.println("Enter 0 for Repeat, others for Exit:");
-				Repeatnew=in.nextInt();
-				if(Repeatnew==0){
-					System.out.println("Enter 0 for Simulation with the old Cluster, others to init new Cluster:");
-					Repeatold=in.nextInt();
-				}else{
-					Repeatold=5;
-					
-				}
+			switch (BrushSize){
+			
+			case 0: 
+				Cluster=BrushPoint(Cluster, ClusterWeidth, ClusterLength, Force, ForcePosition);
+				System.out.println("Cluster after "+(i+1)+" Passage: ");
+				PrintMatrix(Cluster, ClusterWeidth, ClusterLength);
+				System.out.println("Central Force: "+Force+"; The Central Position (Weidth/Length): "+(ForcePosition[0]+1)+" / "+(ForcePosition[1]+1));
+				System.out.println("Function: Brush Point (100%), only Point Force");
+				System.out.println("Exit enter 1, any other Button -> next Force");
+				ExitValue= in.nextInt();
+				break;				
+			case 1:
+				Cluster=BrushSmall(Cluster, ClusterWeidth, ClusterLength, Force, ForcePosition);
+				System.out.println("Cluster after "+(i+1)+" Passage: ");
+				PrintMatrix(Cluster, ClusterWeidth, ClusterLength);
+				System.out.println("Central Force: "+Force+"; The Central Position (Weidth/Length): "+(ForcePosition[0]+1)+" / "+(ForcePosition[1]+1));
+				System.out.println("Function: Brush Small (50% 100% 50%), Point Force and Neighbor");
+				System.out.println("Exit enter 1, any other Button -> next Force");
+				ExitValue= in.nextInt();
+				break;	
+			case 2:
+				Cluster=BrushMedium(Cluster, ClusterWeidth, ClusterLength, Force, ForcePosition);
+				System.out.println("Cluster after "+(i+1)+" Passage: ");
+				PrintMatrix(Cluster, ClusterWeidth, ClusterLength);
+				System.out.println("Central Force: "+Force+"; The Central Position (Weidth/Length): "+(ForcePosition[0]+1)+" / "+(ForcePosition[1]+1));
+				System.out.println("Function: Brush Medium (33% 66% 100% 66% 33%, Point Force, Neighbor and Neighbor of the Neighbor");
+				System.out.println("Exit enter 1, any other Button -> next Force");
+				ExitValue= in.nextInt();
+			case 3:
+				Cluster=BrushTall(Cluster, ClusterWeidth, ClusterLength, Force, ForcePosition);
+				System.out.println("Cluster after "+(i+1)+" Passage: ");
+				PrintMatrix(Cluster, ClusterWeidth, ClusterLength);
+				System.out.println("Central Force: "+Force+"; The Central Position (Weidth/Length): "+(ForcePosition[0]+1)+" / "+(ForcePosition[1]+1));
+				System.out.println("Function: Brush Tall (25% 50% 75% 100% 75% 50% 25%, Point Force, Neighbor, Neighbor of the Neighbor and Neighbor of the Neighbor of the Neighbor");
+				System.out.println("Exit enter 1, any other Button -> next Force");
+				ExitValue= in.nextInt();
+			default:
+				break;
+			}
+			if (ExitValue==1){
+				i=Passages+1;
+			}
 		}
-	}
 	Gm();
 	}
 }
