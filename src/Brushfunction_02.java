@@ -417,6 +417,7 @@ public class Brushfunction_02 {
 			if (ExitValue==1){
 				i=Passages+1;
 			}
+			
 		}
 	Gm();
 	}
