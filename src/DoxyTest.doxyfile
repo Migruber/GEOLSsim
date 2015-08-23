@@ -796,7 +796,7 @@ FILE_PATTERNS =
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE = NO
+RECURSIVE = YES
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a
@@ -1700,7 +1700,7 @@ LATEX_EXTRA_FILES =
 # The default value is: YES.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-PDF_HYPERLINKS = NO
+PDF_HYPERLINKS = YES
 
 # If the USE_PDFLATEX tag is set to YES, doxygen will use pdflatex to generate
 # the PDF file directly from the LaTeX files. Set this option to YES, to get a

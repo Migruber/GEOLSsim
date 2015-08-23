@@ -27,7 +27,20 @@ public class Vector3D_Double {
 	public void setX(double x){this.x=x;}
 	public void setY(double y){this.y=y;}
 	public void setZ(double z){this.z=z;}
+	public void setXYZ(double x, double y, double z){
+		this.x=x;
+		this.y=y;
+		this.z=z;
+	}
 	
+	public void setXdefault(){this.x=0.0d;} // double 0.0d is pos. zero - default state 
+	public void setYdefault(){this.y=0.0d;}
+	public void setZdefault(){this.z=0.0d;}
+	public void setXYZdefault(){
+		this.x=0.0d;
+		this.y=0.0d;
+		this.z=0.0d;
+	}
 	public void printVector(){
 		System.out.println("x coordinate: "+this.x+"; y coordinate: "+this.y+"; z coordinate: "+this.z);
 	}
