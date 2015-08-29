@@ -5,9 +5,9 @@ package Objects_Geolssim;
  * @date 20150823
  * 
  * @brief This class create an new object - an Vector3D, format double,
- * three values are bundeled into a [3] array like x,y,z coordinates.
- * This format is unsed under other langages as C#, jave also provide a fixed package, build separate
- * is more mermory friendly 
+ * three values are bundled into a [3] array like x,y,z coordinates.
+ * This format is unused under other languages as C#, java also provide a fixed package, build separate
+ * is more memory friendly 
  **/
 public class Vector3D_Double {
 	private double x;

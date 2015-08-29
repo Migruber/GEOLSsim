@@ -1,4 +1,6 @@
-package Objects_Geolssim;
+package Objects_Geolssim.OldClasses_NotUsedClasses;
+
+import Objects_Geolssim.Vector3D_Double;
 
 public class HexClusterPoint {
 	

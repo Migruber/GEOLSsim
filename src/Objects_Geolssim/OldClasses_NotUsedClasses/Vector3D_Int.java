@@ -1,4 +1,4 @@
-package Objects_Geolssim;
+package Objects_Geolssim.OldClasses_NotUsedClasses;
 
 /**
  * @author Michael Alexander Gruber
