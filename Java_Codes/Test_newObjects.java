@@ -1,8 +1,8 @@
 
 import java.util.Scanner;
 import Objects_Geolssim.Vector3D_Double;
-import Objects_Geolssim.OldClasses_NotUsedClasses.Vector3D_Int;
-import Objects_Geolssim.OldClasses_NotUsedClasses.Vector3D_String;
+import Objects_Geolssim_OldClasses_NotUsedClasses.Vector3D_Int;
+import Objects_Geolssim_OldClasses_NotUsedClasses.Vector3D_String;
 
 public class Test_newObjects {
 	static Scanner in= new Scanner (System.in);
