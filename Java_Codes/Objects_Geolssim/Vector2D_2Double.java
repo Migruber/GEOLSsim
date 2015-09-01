@@ -43,6 +43,13 @@ public class Vector2D_2Double {
 			this.y=0.0d;
 		
 		}
+		public static Vector2D_2Double[] SetArrayDefault(Vector2D_2Double[] cluster){
+			for (int i=0;i<6;i++){
+				cluster[i].x=0;
+				cluster[i].y=0;
+			}
+			return cluster;
+		}
 		public void printVector(){
 			System.out.println("x coordinate: "+this.x+"; y coordinate: "+this.y);
 		}
